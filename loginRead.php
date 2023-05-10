@@ -12,17 +12,21 @@ if ($conn->connect_error) {
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$sql = "SELECT `IdAccount` FROM `todoaccount` WHERE `username` = '$username' AND `$password` = 'password'";
+$sql = "SELECT `IdAccount` FROM `todoaccount` WHERE `username` = '$username' AND `password` = '$password'";
 $result = $conn->query($sql);
 
-if($result){
+if ($result) {
     $row = $result->fetch_assoc();
     session_start();
     $_SESSION['idAccount'] = $row['IdAccount'];
-    $id = $_SESSION['idAccount'];
     header('Location: /todo.php');
-}else{
-    header('Location: /loginTodo.php');
+} else {
+    echo "<SCRIPT>
+    alert('Tidak bisa login')
+    window.location.replace('loginTodo.php');
+</SCRIPT>";
+    $conn->close();
+    return;
 }
 
 $conn->close();

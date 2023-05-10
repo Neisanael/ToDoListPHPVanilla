@@ -5,11 +5,13 @@ $password = "";
 $dbname = "todolist";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
+session_start();
+$idAccount = $_SESSION['idAccount'];
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM `todofunction`";
+$sql = "SELECT * FROM `todofunction` WHERE `IdAccount` = $idAccount";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

@@ -16,6 +16,9 @@
     <div class="container">
         <?php include 'read.php'; ?>
     </div>
+    <form action="/out.php" method="get">
+        <button type="submit">logout</button>
+    </form>
 </body>
 
 </html>
